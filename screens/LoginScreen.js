@@ -1,15 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image, KeyboardAvoidingView } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Image } from 'react-native'
-import { KeyboardAvoidingView } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { TextInput } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView
@@ -28,15 +28,15 @@ const LoginScreen = () => {
           <Text style={{
             fontSize: 18,
             fontWeight: 'bold',
-            marginLeft: 50,
             marginTop: 12,
             color: '#041E42',
+            textAlign: 'center',
           }}
           >
             Log In to your Account</Text>
         </View>
 
-        <View style={{ marginTop: 70 }}>
+        <View style={{ marginTop: 50 }}>
           <View style={{
             flexDirection: "row",
             alignItems: "center",
@@ -44,7 +44,7 @@ const LoginScreen = () => {
             backgroundColor: "#D0D0D0",
             paddingVertical: 5,
             marginTop: 30,
-            borderRedius: 10,
+            borderRadius: 10,
           }}
           >
             <MaterialIcons style={{ marginLeft: 8 }}
@@ -54,7 +54,9 @@ const LoginScreen = () => {
             />
 
             <TextInput
-              style={{ color: 'gray', marginVertical: 10, width: 250 }}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+              style={{ color: 'gray', marginVertical: 8, width: 280, fontSize: email ? 16 : 16 }}
               placeholder='enter you Email' />
           </View>
 
@@ -66,7 +68,7 @@ const LoginScreen = () => {
               backgroundColor: "#D0D0D0",
               paddingVertical: 5,
               marginTop: 30,
-              borderRedius: 10,
+              borderRadius: 10,
             }}
           >
             <AntDesign style={{ marginLeft: 8 }}
@@ -75,10 +77,37 @@ const LoginScreen = () => {
               color='gray'
             />
             <TextInput
-              style={{ color: 'gray', marginVertical: 10, width: 250 }}
+              value={password}
+              onChangetext={(text) => setPassword(text)}
+              secureTextEntry={true}
+              style={{ color: 'gray', marginVertical: 8, width: 280, fontSize: password ? 16 : 16 }}
               placeholder='enter you Password' />
           </View>
         </View>
+
+        <View style={{ marginTop: 12, flexDirection: "row", alignItems: 'center', justifyContent: "space-between" }}>
+          <Text>Keep me logged in</Text>
+
+          <Text style={{ color: "#007FFF", fontWeight: "500" }}>Forgot Password</Text>
+        </View>
+
+        <View style={{ marginTop: 70 }} />
+
+        <Pressable style={{
+          width: 200,
+          backgroundColor: "#FEBE10",
+          borderRadius: 6,
+          marginLeft: "auto",
+          marginRight: "auto",
+          padding: 15,
+        }}
+        >
+          <Text style={{textAlign:"center", color: "white", fontSize:16, fontWeight:"bold"}}>Login</Text>
+        </Pressable>
+
+        <Pressable onPress={()=> navigation.navigate("Register")} style={{marginTop:15}}>
+          <Text style={{textAlign:"center", color: "gray", fontSize:16,}}>Don't have an acount? Sign Up</Text>
+        </Pressable>
       </KeyboardAvoidingView>
     </SafeAreaView>
   )
