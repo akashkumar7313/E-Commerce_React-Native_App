@@ -36,7 +36,7 @@ const RegisterScreen = () => {
             Register To Your Acount</Text>
         </View>
 
-        <View style={{ marginTop: 50 }}>
+        <View style={{ marginTop: 30 }}>
           <View style={{
             flexDirection: "row",
             alignItems: "center",
